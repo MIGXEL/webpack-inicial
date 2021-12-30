@@ -1,7 +1,5 @@
-import Componentes from "../controllers/inicio.controlador";
-import Ejemplo1 from '../controllers/ejemplo1.controlador';
-import ejemplo2 from "../controllers/ejemplo2.controlador";
 /* ------ ------ IMPORTACIONES ------ ------ */
+import Componentes from "../controllers/inicio.controlador";
 
 
 /* ------ ------ referencia html ------ ------ */

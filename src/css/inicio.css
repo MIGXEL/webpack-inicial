@@ -1,0 +1,22 @@
+.av_texto_contenedor{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h1{
+    color: var(--color-light);
+    font-size: 3rem;
+    font-weight: var(--font-regular);
+}
+.av__img__logo{
+    text-align: center;
+}
+@media (max-width: 600px) {
+
+    .av_texto_contenedor h1{
+        color: var(--color-primario);
+        text-align: center;
+    }
+}

@@ -1,11 +1,14 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
 
     mode: 'development',
+    output: {
+        clean: true
+    },
     optimization: {
         minimizer: [new OptimizeCssAssetsPlugin()]
     },
@@ -24,8 +27,7 @@ module.exports = {
                 test: /\.html$/i,
                 loader: 'html-loader',
                 options: {
-                    attributes: false,
-                    minimize: false
+                    sources: false
                 }
             },
             {

@@ -1,5 +1,5 @@
 import  inicio from '../views/inicio.html';
-import '../css/componentes.css';
+import '../css/inicio.css'
 
 
 export default () => {

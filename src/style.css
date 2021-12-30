@@ -1,4 +1,51 @@
-html, body{
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;600;700&display=swap');
 
-    background-color: skyblue;
+/****** VARIABLES ******/
+
+/* colores */
+:root{
+    --color-primario: #FF4C29;
+    --color-secundario: #334756;
+    --color-tercero: #2C394B;
+    --color-cuarto: #082032;
+    --color-light: #D8E3E7;
+
+}
+
+/* furntes */
+:root{
+    --font-principal: 'Oswald', sans-serif;
+    --font-light: 200;
+    --font-normal: 300;
+    --font-regular: 400;
+    --font-bold: 600;
+    --font-super-bold: 700;
+}
+html, body{
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-secundario);
+    font-family: var(--font-principal);
+    box-sizing: border-box;
+}
+
+*, *::before, *::after{
+
+    box-sizing: border-box;
+}
+
+img{
+    width: 250px;
+}
+
+.contenedor{
+    width: 1200px;
+    height: 100vh;
+    margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+    .contenedor {
+        width: 90%;
+    }
 }

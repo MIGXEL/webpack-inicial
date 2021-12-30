@@ -1,39 +1,31 @@
-const HtmlWebpackPlugin         = require('html-webpack-plugin');
-const MiniCssExtractPlugin      = require('mini-css-extract-plugin');
-const OptimizeCssAssetsPlugin   = require('optimize-css-assets-webpack-plugin');
-const CopyPlugin                = require('copy-webpack-plugin');
-const MinifyPlugin              = require('babel-minify-webpack-plugin');
-const { CleanWebpackPlugin }    = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const CssMinimizer = require('css-minimizer-webpack-plugin');
+const Terser = require('terser-webpack-plugin');
 
 module.exports = {
 
     mode: 'production',
-    optimization: {
-        minimizer: [new OptimizeCssAssetsPlugin()]
-    },
+
     output: {
-        filename: 'main.[contentHash].js'
+        clean: true,
+        filename: 'main.[contenthash].js'
     },
     module: {
         rules: [
-            {   test: /\.js$/, 
-                exclude: /node_modules/, 
-                use: [
-                    'babel-loader'
-                ] 
-            },
             {
                 test: /\.css$/i,
                 exclude: /style\.css$/i,
                 use: [
-                    'style-loader', 
+                    'style-loader',
                     'css-loader'
                 ],
             },
             {
                 test: /style\.css$/i,
                 use: [
-                    MiniCssExtractPlugin.loader, 
+                    MiniCssExtractPlugin.loader,
                     'css-loader'
                 ],
             },
@@ -41,8 +33,7 @@ module.exports = {
                 test: /\.html$/i,
                 loader: 'html-loader',
                 options: {
-                    attributes: false,
-                    minimize: false
+                    sources: false
                 }
             },
             {
@@ -56,7 +47,24 @@ module.exports = {
                     },
                 ],
             },
+            {
+                test: /\.m?js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
+            }
 
+        ]
+    },
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new CssMinimizer(),
+            new Terser()
         ]
     },
     plugins: [
@@ -65,15 +73,13 @@ module.exports = {
             filename: './index.html',
         }),
         new MiniCssExtractPlugin({
-            filename: '[name].[contentHash].css',
+            filename: '[name].[fullhash].css',
             ignoreOrder: false
         }),
         new CopyPlugin({
             patterns: [
                 { from: 'src/assets', to: 'assets/' },
             ],
-        }),
-        new MinifyPlugin(),
-        new CleanWebpackPlugin(),
+        })
     ],
 }
